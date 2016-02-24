@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"UC Data for Mark Keppel High, 1994 - 2014\"),\n\n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel(\n      h2(\"UC Schools\"),\n      helpText(\"Choose a UC school from the box to see the application,\n        acceptance, and enrollment rates for the school.\"),\n      selectInput(\"school\", \n                  label = \"Choose a school to be displayed\",\n                  choices = list(\"UC Berkeley\", \"UCLA\",\n                                 \"UC San Diego\", \"UC Davis\",\n                                 \"UC Riverside\", \"UC Merced\",\n                                  \"UC Irvine\",\n                                 \"UC Santa Barbara\"),\n                  selected = \"UC Berkeley\"),\n      em(\"UC Santa Cruz not included due to lack of data\"),\n      br(),\n      br(),\n      br(),\n      br(),\n      br(),\n      imageOutput(\"pic\")\n    ),\n\n    # Show a plot of the generated distribution\n    mainPanel(\n      h2(textOutput(\"title\")),\n      plotOutput(\"plot\")\n    )\n  )\n))\n",
+    "created" : 1456153343219.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2078210916",
+    "id" : "21F17131",
+    "lastKnownWriteTime" : 1456181252,
+    "last_content_update" : 1456181252316,
+    "path" : "C:/Users/Eric/Desktop/UCShiny/UC/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

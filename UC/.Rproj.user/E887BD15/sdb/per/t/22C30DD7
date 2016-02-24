@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(ggplot2)\nlibrary(tidyr)\nlibrary(data.table)\n\nUCData <- fread(\"data/UCData.csv\")\n\n#reformat data\nUCDatalong <- gather(UCData, Stats, NumberOfStudents, UCBApplicants:UCMEnrollees)\n\nshinyServer(function(input, output) {\n\n  output$title <- renderText({\n    input$school\n  })\n  output$pic <- renderImage({\n    \n    pict <-switch(input$school,\n                  \"UC Berkeley\" = \"UCBlogo.png\",\n                  \"UCLA\" = \"UCLAlogo.png\",\n                  \"UC San Diego\" = \"UCSDlogo.png\", \n                  \"UC Irvine\" = \"UCIlogo.jpg\",\n                  \"UC Davis\"= \"UCDlogo.png\", \n                  \"UC Riverside\" = \"UCRlogo.png\",\n                  \"UC Santa Barbara\" = \"UCSBlogo.png\",\n                  \"UC Merced\" = \"UCMlogo.jpg\" \n                  \n                  )\n    \n    list(\n      src=paste0(\"images/\", pict),\n      height = 200,\n      width = 200\n      )\n  }, deleteFile = FALSE)\n  \n  output$plot <- renderPlot({\n    \n    data1 <- switch(input$school,\n                   \"UC Berkeley\" = UCDatalong[1:63,],\n                   \"UCLA\" = UCDatalong[64:126,],\n                   \"UC San Diego\" = UCDatalong[127:189,], \n                   \"UC Irvine\" = UCDatalong[190:252,],\n                   \"UC Davis\"=UCDatalong[253:315,], \n                   \"UC Riverside\" = UCDatalong[316:378,],\n                   \"UC Santa Barbara\" = UCDatalong[379:441,],\n                   \"UC Merced\" = na.omit(UCDatalong[442:504,]))\n    \n    ggplot(data=data1, aes(x=Year, y=NumberOfStudents, group=Stats, colour=Stats)) +\n      geom_line(size=1.5) +\n      geom_point(size = 3, fill = \"white\")+\n      labs(y=\"Number of Students\")\n\n    \n  })\n\n})\n",
+    "created" : 1456153343974.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3682379046",
+    "id" : "22C30DD7",
+    "lastKnownWriteTime" : 1456181258,
+    "last_content_update" : 1456181258543,
+    "path" : "C:/Users/Eric/Desktop/UCShiny/UC/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

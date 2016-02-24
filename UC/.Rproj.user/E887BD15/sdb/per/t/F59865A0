@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "library(ggplot2)\nlibrary(tidyr)\nlibrary(data.table)\n\nUCData <- fread(\"UCData.csv\")\n\n#reformat data\nUCDatalong <- gather(UCData, Stats, NumberOfStudents, UCBApplicants:UCMEnrollees)\n\nggplot(data=UCDatalong, aes(x=Year, y=NumberOfStudents, group=Stats, colour=Stats)) +\n  geom_line() +\n  geom_point()\n\n#test\nggplot(data=UCDatalong[1:63,], aes(x=Year, y=NumberOfStudents, group=Stats, colour=Stats)) +\n  geom_line() +\n  geom_point()+labs(y=\"Number of Students\")",
+    "created" : 1456169230368.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3087570816",
+    "id" : "F59865A0",
+    "lastKnownWriteTime" : 1456172920,
+    "last_content_update" : 0,
+    "path" : "~/test.R",
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 0,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
