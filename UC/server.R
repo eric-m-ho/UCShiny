@@ -45,14 +45,14 @@ shinyServer(function(input, output) {
 
     
     data1 <- switch(input$school,
-                   "UC Berkeley" = UCDatalong[1:63,],
-                   "UCLA" = UCDatalong[64:126,],
-                   "UC San Diego" = UCDatalong[127:189,], 
-                   "UC Irvine" = UCDatalong[190:252,],
-                   "UC Davis"=UCDatalong[253:315,], 
-                   "UC Riverside" = UCDatalong[316:378,],
-                   "UC Santa Barbara" = UCDatalong[379:441,],
-                   "UC Merced" = na.omit(UCDatalong[442:504,]))
+                   "UC Berkeley" = UCDatalong[grep("UCB", UCDatalong$Stats),],
+                   "UCLA" = UCDatalong[grep("UCLA", UCDatalong$Stats),],
+                   "UC San Diego" = UCDatalong[grep("UCSD", UCDatalong$Stats),], 
+                   "UC Irvine" = UCDatalong[grep("UCI", UCDatalong$Stats),],
+                   "UC Davis"=UCDatalong[grep("UCD", UCDatalong$Stats),], 
+                   "UC Riverside" = UCDatalong[grep("UCR", UCDatalong$Stats),],
+                   "UC Santa Barbara" = UCDatalong[grep("UCSB", UCDatalong$Stats),],
+                   "UC Merced" = na.omit(UCDatalong[grep("UCM", UCDatalong$Stats),]))
     
   
     p<-ggplot(data=data1, aes(x=Year, y=NumberOfStudents, colour=factor(Stats, labels = c("Admits", "Applicants", "Enrollees")))) +
@@ -62,6 +62,26 @@ shinyServer(function(input, output) {
     
     gg <- ggplotly(p)
     gg
+    
+  })
+  
+  output$heatmap <- renderPlotly({
+    
+    stat <- input$button
+    
+    UCDatareg<- UCDatalong[grep(pattern = stat, x=UCDatalong$Stats),]
+    
+    #heatmap
+    
+    #remove certain part of strings
+    UCDatareg$Stats= gsub(pattern = stat, replacement = "",x=UCDatareg$Stats)
+    
+    q <- ggplot(UCDatareg, aes(Year, Stats)) + geom_tile(aes(fill = NumberOfStudents),
+                                                         colour = "white") + scale_fill_gradient(low = "white",
+                                                                                                 high = "steelblue")+labs(title = paste(stat, "Heatmap", sep = " "), y = stat, fill = "Number of Students")
+    
+    heat <- ggplotly(q)
+    heat
     
   })
 

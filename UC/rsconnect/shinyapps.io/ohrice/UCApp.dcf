@@ -2,8 +2,8 @@ name: UCApp
 account: ohrice
 server: shinyapps.io
 appId: 84781
-bundleId: 379056
+bundleId: 381763
 url: https://ohrice.shinyapps.io/UCApp/
-when: 1456287002.26233
+when: 1456550096.16887
 asMultiple: FALSE
 asStatic: FALSE

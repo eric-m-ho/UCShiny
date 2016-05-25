@@ -11,7 +11,7 @@ library(plotly)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("UC Data for Mark Keppel High, 1994 - 2014"),
+  titlePanel("UC Data for Mark Keppel High, 1994 - 2015"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
@@ -34,6 +34,10 @@ shinyUI(fluidPage(
       br(),
       br(),
       br(),
+      helpText("Choose a statistic to be displayed on the heatmap."),
+      radioButtons("button",
+                   label = "Choose a statistic",
+                   choices = list("Applicants", "Admits", "Enrollees")),
       br(),
       br(),
       imageOutput("pic")
@@ -42,7 +46,11 @@ shinyUI(fluidPage(
     # Show a plot of the generated distribution
     mainPanel(
       h2(textOutput("title")),
-      plotlyOutput("plot")
+      plotlyOutput("plot"),
+      br(),
+      br(),
+      br(),
+      plotlyOutput("heatmap")
     )
   )
 ))
