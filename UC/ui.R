@@ -11,7 +11,7 @@ library(plotly)
 shinyUI(fluidPage(
 
   # Application title
-  titlePanel("UC Data for Mark Keppel High, 1994 - 2017"),
+  titlePanel("UC Data for Mark Keppel High, 1994 - 2018"),
 
   # Sidebar with a slider input for number of bins
   sidebarLayout(
